@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -578,7 +578,7 @@ function recalcularVolumes() {
   const rec  = Math.max(0, tqd.fin - tqd.ini);
   document.getElementById('vol-enviado').textContent   = formatBRL(env);
   document.getElementById('vol-recebido').textContent  = formatBRL(rec);
-  document.getElementById('vol-diferenca').textContent = formatBRL(env - rec);
+  document.getElementById('vol-diferenca').textContent = formatBRL(rec - env);
 }
 
 function sincronizarVermelho() {
@@ -928,8 +928,8 @@ function gerarConclusao() {
 
   // OBSERVAÇÃO
   txt += '\nOBSERVAÇÃO\n';
-  if (volDif !== null && volDif > 0 && tankPara) {
-    const difBR = volDif.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+  if (volDif !== null && volDif < 0 && tankPara) {
+    const difBR = Math.abs(volDif).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
     txt += 'DIFERENÇA DE ' + difBR + ' LITROS A MENOS EM RELAÇÃO AO RECEBIMENTO DE COMBUSTÍVEL ' + tankPara + '\n';
   }
   if (consumoVal !== null) txt += 'CONSUMO DURANTE A TRANSFERENCIA L/H: ' + consumoVal + '\n';
